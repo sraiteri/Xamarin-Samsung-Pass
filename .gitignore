@@ -1,0 +1,6 @@
+Xamarin.SamsungPass/SamsungPass/bin/
+Xamarin.SamsungPass/SamsungPass/obj/
+Xamarin.SamsungPass/SamsungPass.Android/bin/
+Xamarin.SamsungPass/SamsungPass.Android/obj/
+*.userprefs
+*.DS_Store
