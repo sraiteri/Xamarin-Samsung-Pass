@@ -3,4 +3,7 @@
 	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="21" />
 	<application android:label="SamsungPass Example" android:icon="@drawable/icon">
 	</application>
+
+	<!-- Samsung Pass permission -->
+	<uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 </manifest>

@@ -410,7 +410,7 @@ namespace Com.Samsung.Android.Sdk.Pass
 
         static void InvokeOnStarted (IntPtr jnienv, IntPtr lrefThis)
         {
-            IIdentifyListener __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
+            var __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
             __this.OnStarted();
         }
         #pragma warning restore 0169
@@ -481,8 +481,8 @@ namespace Com.Samsung.Android.Sdk.Pass
 
         static void InvokeOnFinished (IntPtr jnienv, IntPtr lrefThis, int resultCode)
         {
-            IIdentifyListener __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
-            __this.OnFinished(resultCode);
+			var __this = Java.Lang.Object.GetObject<IRegisterListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
+            __this.OnFinished();
         }
         #pragma warning restore 0169
         #endregion

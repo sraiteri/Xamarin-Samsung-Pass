@@ -41,11 +41,33 @@ namespace SamsungPass.Android
 			}
 		}
 		
+		public partial class Dimension
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int activity_horizontal_margin = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int activity_vertical_margin = 2130968577;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Dimension()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int logo_image = 2130837505;
 			
 			static Drawable()
 			{
@@ -60,8 +82,50 @@ namespace SamsungPass.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			// aapt resource value: 0x7f080000
+			public const int TextView01 = 2131230720;
+			
+			// aapt resource value: 0x7f080005
+			public const int buttonCancel = 2131230725;
+			
+			// aapt resource value: 0x7f08000d
+			public const int buttonCustomizedDialogWithSetDialogDismiss = 2131230733;
+			
+			// aapt resource value: 0x7f08000c
+			public const int buttonCustomizedDialogWithTransparency = 2131230732;
+			
+			// aapt resource value: 0x7f080008
+			public const int buttonGetRegisteredFingerprintID = 2131230728;
+			
+			// aapt resource value: 0x7f080007
+			public const int buttonGetRegisteredFingerprintName = 2131230727;
+			
+			// aapt resource value: 0x7f080001
+			public const int buttonHasRegisteredFinger = 2131230721;
+			
+			// aapt resource value: 0x7f080002
+			public const int buttonIdentify = 2131230722;
+			
+			// aapt resource value: 0x7f080009
+			public const int buttonIdentifyWithIndex = 2131230729;
+			
+			// aapt resource value: 0x7f080006
+			public const int buttonRegisterFinger = 2131230726;
+			
+			// aapt resource value: 0x7f08000a
+			public const int buttonShowIdentifyDialogWithIndex = 2131230730;
+			
+			// aapt resource value: 0x7f080003
+			public const int buttonShowIdentifyDialogWithPW = 2131230723;
+			
+			// aapt resource value: 0x7f08000b
+			public const int buttonShowIdentifyDialogWithTitleNLogo = 2131230731;
+			
+			// aapt resource value: 0x7f080004
+			public const int buttonShowIdentifyDialogWithoutPW = 2131230724;
+			
+			// aapt resource value: 0x7f08000e
+			public const int listView1 = 2131230734;
 			
 			static Id()
 			{
@@ -77,7 +141,10 @@ namespace SamsungPass.Android
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int ListEntry = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Main = 2130903041;
 			
 			static Layout()
 			{
@@ -89,14 +156,30 @@ namespace SamsungPass.Android
 			}
 		}
 		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int Main = 2131165184;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int action_settings = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int app_name = 2131034112;
 			
 			static String()
 			{
@@ -104,6 +187,28 @@ namespace SamsungPass.Android
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int AppBaseTheme = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int AppTheme = 2131099649;
+			
+			// aapt resource value: 0x7f060002
+			public const int ButtonStyle = 2131099650;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
