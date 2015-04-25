@@ -3,6 +3,7 @@ using Android.Runtime;
 using Android.Content;
 using Android.Util;
 using Java.Util;
+using System.Collections.Generic;
 
 namespace Com.Samsung.Android.Sdk.Pass
 {
@@ -172,26 +173,28 @@ namespace Com.Samsung.Android.Sdk.Pass
         }
 
         IntPtr _registeredFingerprintName;
-        public SparseArray RegisteredFingerprintName
+		public IList<string> RegisteredFingerprintName
         {
             get {
                 if (_registeredFingerprintName == IntPtr.Zero)
                     _registeredFingerprintName = JNIEnv.GetMethodID(_classRef, "getRegisteredFingerprintName", "()Landroid/util/SparseArray;");
 
                 var resultPtr = JNIEnv.CallObjectMethod(Handle, _registeredFingerprintName);
-                return new Java.Lang.Object(resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<SparseArray>();
+				SparseArray sparseArray = new Java.Lang.Object (resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<SparseArray>();
+				return new List<string> (sparseArray.ToArray<string> ());
             }
         }
 
         IntPtr _registeredFingerprintUniqueId;
-        public SparseArray RegisteredFingerprintUniqueId
+		public IList<string> RegisteredFingerprintUniqueId
         {
             get {
                 if (_registeredFingerprintUniqueId == IntPtr.Zero)
                     _registeredFingerprintUniqueId = JNIEnv.GetMethodID(_classRef, "getRegisteredFingerprintUniqueID", "()Landroid/util/SparseArray;");
 
-                var resultPtr = JNIEnv.CallObjectMethod(Handle, _registeredFingerprintUniqueId);
-                return new Java.Lang.Object(resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<SparseArray>();
+				var resultPtr = JNIEnv.CallObjectMethod(Handle, _registeredFingerprintUniqueId);
+				SparseArray sparseArray = new Java.Lang.Object (resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<SparseArray>();
+				return new List<string> (sparseArray.ToArray<string> ());
             }
         }
             
@@ -280,12 +283,6 @@ namespace Com.Samsung.Android.Sdk.Pass
 
             JNIEnv.CallVoidMethod(Handle, _startIdentifyWithDialog, new JValue(context), new JValue(listener), new JValue(enablePassword));
         }
-             
-
-
-       
-
-       
         #endregion
     }
     #endregion

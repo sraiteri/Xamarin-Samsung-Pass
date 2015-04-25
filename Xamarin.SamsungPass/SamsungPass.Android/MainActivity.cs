@@ -120,11 +120,11 @@ namespace SamsungPass.Android
 			} catch (SsdkUnsupportedException e) {
 				Log("Exception: " + e);
 				return;
-			} catch (UnsupportedOperationException){
+			} catch (UnsupportedOperationException e){
 				Log("Fingerprint Service is not supported in the device");
 				return;
 			} catch (Java.Lang.Exception) {
-				Log("Did you set the manifest permission?");
+				Log("Did you set the manifest permission? Do you have a Samsung device?");
 				return;
 			}
 				
@@ -283,15 +283,15 @@ namespace SamsungPass.Android
 				LogClear();
 				try {
 					Log("=Fingerprint Name=");
-					var list = _spassFingerprint.RegisteredFingerprintName;
-					if (list == null) {
-						Log("Registered fingerprint is not existed.");
+					var registeredFingerprintNames = _spassFingerprint.RegisteredFingerprintUniqueId;
+					if (registeredFingerprintNames == null) {
+						Log("Registered fingerprints do not exist on this device");
 					} else {
-						for (var i=0; i < list.Size(); i++)
+						int i=0;
+						foreach (var registeredFingerprintName in registeredFingerprintNames)
 						{
-							var index = list.KeyAt(i);
-							var name = list.Get(index);
-							Log("index " + index + ", Name is " + name);
+							Log("Index " + i + ", Name is " + registeredFingerprintName);
+							i++;
 						}
 					}
 				} catch (UnsupportedOperationException) {
@@ -303,18 +303,17 @@ namespace SamsungPass.Android
 				LogClear();
 				try {
 					if (_spass.IsFeatureEnabled(Spass.DeviceFingerprintUniqueId)) {
-						SparseArray list;
 						try {
 							Log("=Fingerprint Unique ID=");
-							list = _spassFingerprint.RegisteredFingerprintUniqueId;
-							if (list == null) {
-								Log("Registered fingerprint is not existed.");
+							var registeredFingerprintIds = _spassFingerprint.RegisteredFingerprintUniqueId;
+							if (registeredFingerprintIds == null) {
+								Log("Registered fingerprints do not exist on this device");
 							} else {
-								for (var i=0; i < list.Size(); i++)
+								int i=0;
+								foreach (var registedFingerprintId in registeredFingerprintIds)
 								{
-									var index = list.KeyAt(i);
-									var id = list.Get(index);
-									Log("index " + index + ", Unique ID is " + id);
+									Log("Index " + i + ", Unique ID is " + registedFingerprintId);
+									i++;
 								}
 							}
 						} catch (IllegalStateException ise) {
