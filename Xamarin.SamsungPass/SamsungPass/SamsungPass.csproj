@@ -12,6 +12,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>SamsungPass</AssemblyName>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <ReleaseVersion>1.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,10 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Com\Samsung\Android\Sdk\SSdkUnsupportedException.cs" />
     <Compile Include="Com\Samsung\Android\Sdk\Pass\Spass.cs" />
     <Compile Include="Com\Samsung\Android\Sdk\Pass\SpassFingerprint.cs" />
     <Compile Include="Com\Samsung\Android\Sdk\Pass\SpassInvalidStateException.cs" />
+    <Compile Include="Com\Samsung\Android\Sdk\SsdkVendorCheck.cs" />
+    <Compile Include="Com\Samsung\Android\Sdk\SsdkUnsupportedException.cs" />
+    <Compile Include="Com\Samsung\Android\Sdk\SsdkInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Additions\AboutAdditions.txt" />

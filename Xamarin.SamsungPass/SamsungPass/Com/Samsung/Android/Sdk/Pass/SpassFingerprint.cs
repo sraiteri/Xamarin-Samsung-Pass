@@ -272,15 +272,7 @@ namespace Com.Samsung.Android.Sdk.Pass
             if (_startIdentify == IntPtr.Zero)
                 _startIdentify = JNIEnv.GetMethodID (_classRef, "startIdentify", "(Lcom/samsung/android/sdk/pass/SpassFingerprint$IdentifyListener;)V");
 
-			try {
-				JNIEnv.CallVoidMethod(Handle, _startIdentify, new JValue(listener));
-			} catch (Java.Lang.Exception e) {
-				//TODO: Improve error handling here - do we have to throw/handle the custom exception from here?
-				if (e.Class.Name.Equals ("com.samsung.android.sdk.pass.SpassInvalidStateException")) {
-					throw new SpassInvalidStateException (e.Handle, JniHandleOwnership.DoNotTransfer);
-				}
-				throw e;
-			}
+			JNIEnv.CallVoidMethod(Handle, _startIdentify, new JValue(listener));
         }
 
         IntPtr _startIdentifyWithDialog;
@@ -366,7 +358,7 @@ namespace Com.Samsung.Android.Sdk.Pass
 
         static void InvokeOnFinished (IntPtr jnienv, IntPtr lrefThis, int resultCode)
         {
-            IIdentifyListener __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
+            var __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
             __this.OnFinished(resultCode);
         }
         #pragma warning restore 0169
@@ -390,7 +382,7 @@ namespace Com.Samsung.Android.Sdk.Pass
 
         static void InvokeOnReady (IntPtr jnienv, IntPtr lrefThis)
         {
-            IIdentifyListener __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
+            var __this = Java.Lang.Object.GetObject<IIdentifyListener>(lrefThis, JniHandleOwnership.DoNotTransfer);
             __this.OnReady();
         }
         #pragma warning restore 0169

@@ -5,17 +5,18 @@ using Android.Content;
 namespace Com.Samsung.Android.Sdk.Pass
 {
     [Register (Spass.JniName, DoNotGenerateAcw=true)]
-    public class Spass : Java.Lang.Object
+	public class Spass : Java.Lang.Object, ISdkInterface
     {
         public const string JniName = "com/samsung/android/sdk/pass/Spass";
 
         #region JavaObject
         static readonly IntPtr _classRef = JNIEnv.FindClass (JniName);
+		static readonly IntPtr _interfaceClassRef = JNIEnv.FindClass (ISsdkInterfaceInvoker.JniName);
 
         static IntPtr _constructor;
 
         [Register (".ctor", "()V", "")]
-        public Spass () : base (IntPtr.Zero, JniHandleOwnership.DoNotTransfer)
+		public Spass () : base(IntPtr.Zero, JniHandleOwnership.DoNotTransfer)
         {
             if (Handle != IntPtr.Zero)
                 return;
@@ -99,46 +100,32 @@ namespace Com.Samsung.Android.Sdk.Pass
         #endregion
 
         #region Instance Methods/Fields
-        IntPtr _versionCode;
-        public int VersionCode
+		IntPtr _getVersionCode;
+		public int GetVersionCode()
         {
-            get 
-            { 
-                if (_versionCode == IntPtr.Zero)
-                    _versionCode = JNIEnv.GetMethodID (_classRef, "getVersionCode", "()I");
+			if (_getVersionCode == IntPtr.Zero)
+				_getVersionCode = JNIEnv.GetMethodID (_interfaceClassRef, "getVersionCode", "()I");
 
-                return JNIEnv.CallIntMethod(Handle, _versionCode);
-            }
+			return JNIEnv.CallIntMethod(Handle, _getVersionCode);
         }
 
-        IntPtr _versionName;
-        public string VersionName
+		IntPtr _getVersionName;
+		public string GetVersionName()
         {
-            get 
-            { 
-                if (_versionName == IntPtr.Zero)
-                    _versionName = JNIEnv.GetMethodID (_classRef, "getVersionName", "()Ljava/lang/String;");
+			if (_getVersionName == IntPtr.Zero)
+				_getVersionName = JNIEnv.GetMethodID (_interfaceClassRef, "getVersionName", "()Ljava/lang/String;");
 
-                var resultPtr = JNIEnv.CallObjectMethod(Handle, _versionName);
-				return new Java.Lang.Object(resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<Java.Lang.String>().ToString();
-            }
+			var resultPtr = JNIEnv.CallObjectMethod(Handle, _getVersionName);
+			return new Java.Lang.Object(resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<Java.Lang.String>().ToString();
         }
-
+			
         IntPtr _initialize;
 		public void Initialize(Context context)
         {
             if (_initialize == IntPtr.Zero)
-                _initialize = JNIEnv.GetMethodID (_classRef, "initialize", "(Landroid/content/Context;)V");
+				_initialize = JNIEnv.GetMethodID (_interfaceClassRef, "initialize", "(Landroid/content/Context;)V");
 
-			try {
-				JNIEnv.CallVoidMethod(Handle, _initialize, new JValue(context));
-			} catch (Java.Lang.Exception e) {
-				//TODO: Improve error handling here - do we have to throw/handle the custom exception from here?
-				if (e.Class.Name.Equals ("com.samsung.android.sdk.SsdkUnsupportedException"))
-					throw new SsdkUnsupportedException (e.Handle, JniHandleOwnership.DoNotTransfer);
-
-				throw e;
-			}
+			JNIEnv.CallVoidMethod (Handle, _initialize, new JValue(context));
         }
 
         IntPtr _isFeatureEnabled;

@@ -130,7 +130,7 @@ namespace SamsungPass.Android
 			{
 				_spassFingerprint = new SpassFingerprint(this);
 				Log("Fingerprint Service is supported in the device.");
-				Log("SDK version : " + _spass.VersionName);
+				Log("SDK version : " + _spass.GetVersionName());
 			} else { 
 				LogClear();
 				Log("Fingerprint Service is not supported in the device.");
