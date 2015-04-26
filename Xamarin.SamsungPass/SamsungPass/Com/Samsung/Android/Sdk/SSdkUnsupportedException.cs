@@ -1,10 +1,10 @@
 ﻿using System;
 using Android.Runtime;
 
-namespace Com.Samsung.Android.Sdk.Pass
+namespace Com.Samsung.Android.Sdk
 {
-    [Register (SsdkUnsupportedException.JniName, DoNotGenerateAcw=true)]
-    public class SsdkUnsupportedException : Java.Lang.IllegalStateException
+	[Register (SsdkUnsupportedException.JniName, DoNotGenerateAcw=true)]
+	public class SsdkUnsupportedException : Java.Lang.Exception
     {
         public const string JniName = "com/samsung/android/sdk/SsdkUnsupportedException";
 

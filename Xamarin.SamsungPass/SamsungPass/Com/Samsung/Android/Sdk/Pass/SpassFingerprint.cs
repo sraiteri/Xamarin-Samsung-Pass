@@ -272,7 +272,15 @@ namespace Com.Samsung.Android.Sdk.Pass
             if (_startIdentify == IntPtr.Zero)
                 _startIdentify = JNIEnv.GetMethodID (_classRef, "startIdentify", "(Lcom/samsung/android/sdk/pass/SpassFingerprint$IdentifyListener;)V");
 
-            JNIEnv.CallVoidMethod(Handle, _startIdentify, new JValue(listener));
+			try {
+				JNIEnv.CallVoidMethod(Handle, _startIdentify, new JValue(listener));
+			} catch (Java.Lang.Exception e) {
+				//TODO: Improve error handling here - do we have to throw/handle the custom exception from here?
+				if (e.Class.Name.Equals ("com.samsung.android.sdk.pass.SpassInvalidStateException")) {
+					throw new SpassInvalidStateException (e.Handle, JniHandleOwnership.DoNotTransfer);
+				}
+				throw e;
+			}
         }
 
         IntPtr _startIdentifyWithDialog;

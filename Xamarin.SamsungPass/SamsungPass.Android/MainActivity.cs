@@ -1,14 +1,13 @@
 ﻿using System;
 
 using Android.App;
-using Android.Content;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Com.Samsung.Android.Sdk;
 using Com.Samsung.Android.Sdk.Pass;
 using System.Collections.Generic;
 using Java.Lang;
-using Android.Util;
 
 namespace SamsungPass.Android
 {
@@ -17,12 +16,11 @@ namespace SamsungPass.Android
 	{
 		SpassFingerprint _spassFingerprint;
 		Spass _spass;
-		Context _context;
 		ListView _listView;
 		ArrayAdapter<string> _listAdapter;
-		bool _onReadyIdentify = false;
-		bool _onReadyEnroll = false;
-		bool _isFeatureEnabled = false;
+		bool _onReadyIdentify;
+		bool _onReadyEnroll;
+		bool _isFeatureEnabled;
 
 		#region Interface implementations
 
@@ -106,7 +104,6 @@ namespace SamsungPass.Android
 			base.OnCreate (savedInstanceState);
 
 			SetContentView (Resource.Layout.Main);
-			_context = this;
 			_listAdapter = new ArrayAdapter<string>(this, Resource.Layout.ListEntry, Resource.Id.TextView01);
 			_listView = FindViewById<ListView> (Resource.Id.listView1);
 
@@ -118,18 +115,17 @@ namespace SamsungPass.Android
 			try {
 				_spass.Initialize(this);
 			} catch (SsdkUnsupportedException e) {
-				Log("Exception: " + e);
+				Log(e.Message);
 				return;
-			} catch (UnsupportedOperationException e){
-				Log("Fingerprint Service is not supported in the device");
+			} catch (SecurityException) {
+				Log ("Did you add the permission to the AndroidManifest.xml?");
 				return;
-			} catch (Java.Lang.Exception) {
-				Log("Did you set the manifest permission? Do you have a Samsung device?");
+			} catch (UnsupportedOperationException) {
+				Log ("Fingerprint Service is not supported in the device");
 				return;
 			}
 				
 			_isFeatureEnabled = _spass.IsFeatureEnabled(Spass.DeviceFingerprint);
-
 			if (_isFeatureEnabled)
 			{
 				_spassFingerprint = new SpassFingerprint(this);

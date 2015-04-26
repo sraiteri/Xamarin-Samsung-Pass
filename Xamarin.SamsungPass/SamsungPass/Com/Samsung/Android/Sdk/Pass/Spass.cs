@@ -120,17 +120,25 @@ namespace Com.Samsung.Android.Sdk.Pass
                     _versionName = JNIEnv.GetMethodID (_classRef, "getVersionName", "()Ljava/lang/String;");
 
                 var resultPtr = JNIEnv.CallObjectMethod(Handle, _versionName);
-                return new Java.Lang.Object(resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<Java.Lang.String>().ToString();
+				return new Java.Lang.Object(resultPtr, JniHandleOwnership.TransferLocalRef).JavaCast<Java.Lang.String>().ToString();
             }
         }
 
         IntPtr _initialize;
-        public void Initialize(Context context)
+		public void Initialize(Context context)
         {
             if (_initialize == IntPtr.Zero)
                 _initialize = JNIEnv.GetMethodID (_classRef, "initialize", "(Landroid/content/Context;)V");
 
-            JNIEnv.CallVoidMethod(Handle, _initialize, new JValue(context));
+			try {
+				JNIEnv.CallVoidMethod(Handle, _initialize, new JValue(context));
+			} catch (Java.Lang.Exception e) {
+				//TODO: Improve error handling here - do we have to throw/handle the custom exception from here?
+				if (e.Class.Name.Equals ("com.samsung.android.sdk.SsdkUnsupportedException"))
+					throw new SsdkUnsupportedException (e.Handle, JniHandleOwnership.DoNotTransfer);
+
+				throw e;
+			}
         }
 
         IntPtr _isFeatureEnabled;
