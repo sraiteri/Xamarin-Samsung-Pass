@@ -125,6 +125,8 @@ namespace Com.Samsung.Android.Sdk.Pass
         }
 
         IntPtr _initialize;
+		[Java.Interop.Export (Throws = new [] {
+			typeof (SsdkUnsupportedException)})]
 		public void Initialize(Context context)
         {
             if (_initialize == IntPtr.Zero)
@@ -133,7 +135,7 @@ namespace Com.Samsung.Android.Sdk.Pass
 			try {
 				JNIEnv.CallVoidMethod(Handle, _initialize, new JValue(context));
 			} catch (Java.Lang.Exception e) {
-				//TODO: Improve error handling here - do we have to throw/handle the custom exception from here?
+				//TODO: Workaround until Java exception is cast to the C# exception
 				if (e.Class.Name.Equals ("com.samsung.android.sdk.SsdkUnsupportedException"))
 					throw new SsdkUnsupportedException (e.Handle, JniHandleOwnership.DoNotTransfer);
 

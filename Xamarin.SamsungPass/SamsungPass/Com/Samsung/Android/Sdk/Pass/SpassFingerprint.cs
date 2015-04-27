@@ -267,6 +267,8 @@ namespace Com.Samsung.Android.Sdk.Pass
         }
 
         IntPtr _startIdentify;
+		[Java.Interop.Export (Throws = new [] {
+			typeof (SpassInvalidStateException)})]
         public void StartIdentify(IIdentifyListener listener)
         {
             if (_startIdentify == IntPtr.Zero)
@@ -275,7 +277,7 @@ namespace Com.Samsung.Android.Sdk.Pass
 			try {
 				JNIEnv.CallVoidMethod(Handle, _startIdentify, new JValue(listener));
 			} catch (Java.Lang.Exception e) {
-				//TODO: Improve error handling here - do we have to throw/handle the custom exception from here?
+				//TODO: Workaround until Java exception is cast to the C# exception
 				if (e.Class.Name.Equals ("com.samsung.android.sdk.pass.SpassInvalidStateException")) {
 					throw new SpassInvalidStateException (e.Handle, JniHandleOwnership.DoNotTransfer);
 				}

@@ -4,7 +4,7 @@ using Android.Runtime;
 namespace Com.Samsung.Android.Sdk.Pass
 {
     [Register (SpassInvalidStateException.JniName, DoNotGenerateAcw=true)]
-	public class SpassInvalidStateException : Java.Lang.Exception
+	public class SpassInvalidStateException : Java.Lang.IllegalStateException
     {
         public const string JniName = "com/samsung/android/sdk/pass/SpassInvalidStateException";
 
